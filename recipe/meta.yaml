@@ -1,6 +1,6 @@
 {% set name = "wil" %}
-{% set version = "1.0.240122.1" %}
-{% set sha256 = "e599f2843c01b9e4827e46f11d3651180675c8ecdbba8bdae735f533672989d3" %}
+{% set version = "1.0.240803.1" %}
+{% set sha256 = "39910ab105c6df345e4018a2b61dfbc909a8816c971a3d2cebbefa1f8c481cc6" %}
 
 package:
   name: {{ name|lower }}
@@ -17,6 +17,7 @@ build:
 requirements:
   build:
     - {{ compiler("cxx") }}
+    - {{ stdlib("c") }}
     - cmake
     - ninja
 
