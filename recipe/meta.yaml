@@ -11,7 +11,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 0
+  number: 1
   skip: true  # [not win]
 
 requirements:
@@ -22,9 +22,18 @@ requirements:
     - ninja
 
 test:
+  requires:
+    - {{ compiler('cxx') }}  # [arm64]
+    - cmake                 # [arm64]
+  files:
+    - consumer              # [arm64]
   commands:
     - if not exist %PREFIX%\\Library\\share\\cmake\\WIL\\wilConfig.cmake exit 1
     - if not exist %PREFIX%\\Library\\include\\wil\\com.h exit 1
+    - cmake -S consumer -B consumer-build -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH="%LIBRARY_PREFIX%"  # [arm64]
+    - cmake --build consumer-build  # [arm64]
+    - consumer-build\wil_consumer.exe  # [arm64]
+    - dumpbin /headers consumer-build\wil_consumer.exe | findstr /I /C:"AA64 machine (ARM64)"  # [arm64]
 
 about:
   home: https://github.com/microsoft/wil
