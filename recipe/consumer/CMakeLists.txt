@@ -1,6 +1,0 @@
-cmake_minimum_required(VERSION 3.15)
-project(wil_consumer LANGUAGES CXX)
-find_package(wil CONFIG REQUIRED)
-add_executable(wil_consumer main.cpp)
-set_target_properties(wil_consumer PROPERTIES CXX_STANDARD 17 CXX_STANDARD_REQUIRED YES)
-target_link_libraries(wil_consumer PRIVATE WIL::WIL)
