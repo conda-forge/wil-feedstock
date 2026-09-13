@@ -11,8 +11,12 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 0
-  skip: true  # [not win]
+  number: 1
+  noarch: generic
+  ignore_run_exports:
+    - vc
+    - vc14_runtime
+    - ucrt
 
 requirements:
   build:
@@ -20,6 +24,9 @@ requirements:
     - {{ stdlib("c") }}
     - cmake
     - ninja
+
+  run:
+    - __win
 
 test:
   commands:
